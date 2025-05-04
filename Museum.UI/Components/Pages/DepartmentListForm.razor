@@ -1,0 +1,24 @@
+﻿@page "/departments"
+@inject IDepartmentService _departmentService
+
+
+<h3> Metropolitan Museum Departments </h3>
+
+<DataGrid TItem="Department" Data="@_departments">
+    <ChildContent>
+        <DataGridColumn TItem="Department" Field="DepartmentId" ></DataGridColumn>
+        <DataGridColumn TItem="Department" Field="DisplayName" ></DataGridColumn>
+    </ChildContent>
+</DataGrid>
+
+@code 
+{
+
+    Department[]? _departments { get; set; } = default!;
+     
+
+    protected override async Task OnInitializedAsync()
+    {
+         _departments = await _departmentService.GetDepartments();
+    }
+}  
